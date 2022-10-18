@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script>
+        let httpReq;
+        function send(){
+            httpReq = new XMLHttpRequest();
+            httpReq.onreadystatechange = res;
+            
+            let mg = document.getElementById("mg").value;
+            let or = document.getElementById("or").value;
+            let bn = document.getElementById("bn").value;
+            let url = "add.php?mg=" + mg + "&or=" + or + "&bn=" + bn;
+
+            httpReq.open("GET",url);
+            httpReq.send();
+        }
+        function res(){
+            if(httpReq.readyState == 4 && httpReq.status == 200){
+                document.getElementById("result").innerHTML = httpReq.responseText;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>บันทึกการขาย</h1>
+    มะม่วง กก.ละ 30 บาท ขายได้ <input type="number" id="mg" > กก. <br>
+    ส้ม กก.ละ 70 บาท ขายได้ <input type="number" id="or" > กก. <br>
+    กล้วย หวีละ 30 บาท ขายได้ <input type="number" id="bn" onblur="send()"> หวี <br>
+    <h1 id="result"></h1>
+</body>
+</html>
